@@ -8,5 +8,11 @@ assets:
 start_date: "2018-01-01"
 end_date: "2024-01-01"
 
+train_end: "2022-01-01"
+val_end: "2023-01-01"
+
 data_dir: "data/raw"
 output_file: "prices.csv"
+
+artifacts_dir: "data/artifacts"
+scaler_file: "feature_scaler.json"
