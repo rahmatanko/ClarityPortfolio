@@ -1,0 +1,12 @@
+assets:
+  - AAPL
+  - GOOGL
+  - MSFT
+  - NVDA
+  - TSLA
+
+start_date: "2018-01-01"
+end_date: "2024-01-01"
+
+data_dir: "data/raw"
+output_file: "prices.csv"

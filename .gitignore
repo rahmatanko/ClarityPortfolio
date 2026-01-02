@@ -1,0 +1,77 @@
+# =========================
+# Python basics
+# =========================
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# =========================
+# Virtual environments
+# =========================
+.venv/
+venv/
+env/
+
+# =========================
+# Jupyter notebooks
+# =========================
+.ipynb_checkpoints/
+
+# =========================
+# OS / editor junk
+# =========================
+.DS_Store
+Thumbs.db
+
+# VSCode / IDE
+.vscode/
+.idea/
+
+# =========================
+# Logs
+# =========================
+*.log
+
+# =========================
+# Data (IMPORTANT)
+# =========================
+data/raw/*
+data/processed/*
+data/artifacts/*
+
+# BUT keep structure
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+!data/artifacts/.gitkeep
+
+# =========================
+# Models (VERY IMPORTANT)
+# =========================
+*.zip
+*.pth
+*.pt
+
+# =========================
+# Experiment outputs
+# =========================
+outputs/
+results/
+plots/
+
+# =========================
+# Pytest cache
+# =========================
+.pytest_cache/
+
+# =========================
+# Coverage (if you add later)
+# =========================
+.coverage
+htmlcov/
+
+# =========================
+# Temporary files
+# =========================
+*.tmp
+*.bak
