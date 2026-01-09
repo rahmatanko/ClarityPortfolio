@@ -23,6 +23,7 @@ env/
 # =========================
 .DS_Store
 Thumbs.db
+commit
 
 # VSCode / IDE
 .vscode/
