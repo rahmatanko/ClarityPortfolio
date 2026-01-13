@@ -14,3 +14,15 @@ from .metrics import (
     total_transaction_cost,
     total_turnover,
 )
+
+from .baselines import (
+    align_prices_and_features,
+    build_constant_weight_schedule,
+    build_momentum_weight_schedule,
+    cash_only_strategy,
+    compute_next_step_returns,
+    equal_weight_strategy,
+    evaluate_baseline,
+    momentum_strategy_from_features,
+    run_weight_schedule_backtest,
+)
