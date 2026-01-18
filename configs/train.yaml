@@ -1,0 +1,33 @@
+seed: 42
+
+env:
+  transaction_cost: 0.001
+  downside_penalty_lambda: 10.0
+  cash_return: 0.0
+
+ppo:
+  policy: "MlpPolicy"
+  learning_rate: 0.0003
+  n_steps: 256
+  batch_size: 64
+  n_epochs: 10
+  gamma: 0.99
+  gae_lambda: 0.95
+  clip_range: 0.2
+  ent_coef: 0.01
+  vf_coef: 0.5
+  max_grad_norm: 0.5
+  total_timesteps: 30000
+  device: "cpu"
+
+policy_kwargs:
+  activation_fn: "ReLU"
+  net_arch: [64, 64]
+
+artifacts:
+  model_dir: "data/artifacts/models"
+  run_dir: "data/artifacts/runs"
+  model_name: "ppo_seed42"
+  scaler_name: "feature_scaler_seed42.json"
+  summary_name: "training_summary_seed42.json"
+  validation_backtest_name: "validation_backtest_seed42.csv"

@@ -3,3 +3,6 @@ yfinance
 pyyaml
 pytest
 gymnasium
+torch
+numpy
+stable_baselines3
