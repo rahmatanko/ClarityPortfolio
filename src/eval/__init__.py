@@ -26,3 +26,12 @@ from .baselines import (
     momentum_strategy_from_features,
     run_weight_schedule_backtest,
 )
+
+from .compare import (
+    build_compare_paths,
+    evaluate_all_validation_strategies,
+    prepare_validation_data,
+    run_validation_comparison,
+    save_validation_comparison,
+    validate_saved_ppo,
+)
