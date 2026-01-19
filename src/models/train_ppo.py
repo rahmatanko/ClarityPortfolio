@@ -38,6 +38,24 @@ def load_train_config(config_path: str = TRAIN_CONFIG_PATH) -> dict:
 
     return cfg
 
+def clone_config(cfg: dict) -> dict:
+    # deep-copy config through json-safe roundtrip so seed-specific edits don't mutate the original
+    return json.loads(json.dumps(cfg))
+
+
+def apply_seed_to_config(cfg: dict, seed: int) -> dict:
+    # make a seed-specific config so each run saves to distinct artifact names
+    cfg = clone_config(cfg)
+    cfg["seed"] = seed
+
+    artifacts = cfg["artifacts"]
+    artifacts["model_name"] = f"ppo_seed{seed}"
+    artifacts["scaler_name"] = f"feature_scaler_seed{seed}.json"
+    artifacts["summary_name"] = f"training_summary_seed{seed}.json"
+    artifacts["validation_backtest_name"] = f"validation_backtest_seed{seed}.csv"
+
+    return cfg
+
 
 def set_global_seed(seed: int) -> None:
     # set all seeds we reasonably can so training runs are more reproducible
@@ -83,11 +101,12 @@ def ensure_dir(path: str) -> None:
 def prepare_datasets(
     data_config_path: str = DATA_CONFIG_PATH,
     train_config_path: str = TRAIN_CONFIG_PATH,
+    train_cfg_override: dict | None = None,
 ) -> dict:
     # full data prep for train/validation/test:
     # load prices, split chronologically, build train-only scaler, transform val/test
     data_cfg = load_data_config(data_config_path)
-    train_cfg = load_train_config(train_config_path)
+    train_cfg = train_cfg_override if train_cfg_override is not None else load_train_config(train_config_path)
 
     prices = load_price_data(
         data_dir=data_cfg["data_dir"],
@@ -299,15 +318,17 @@ def save_training_summary(
 def run_training_pipeline(
     data_config_path: str = DATA_CONFIG_PATH,
     train_config_path: str = TRAIN_CONFIG_PATH,
+    cfg_override: dict | None = None,
 ) -> dict:
     # end-to-end training entry point:
     # prepare data, train one model, validate it, save everything
-    cfg = load_train_config(train_config_path)
+    cfg = cfg_override if cfg_override is not None else load_train_config(train_config_path)
     set_global_seed(cfg["seed"])
 
     datasets = prepare_datasets(
         data_config_path=data_config_path,
         train_config_path=train_config_path,
+        train_cfg_override=cfg,
     )
 
     model = train_single_ppo(

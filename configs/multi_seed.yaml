@@ -1,0 +1,10 @@
+seeds:
+  - 42
+  - 43
+  - 44
+
+naming:
+  model_prefix: "ppo"
+  scaler_prefix: "feature_scaler"
+  summary_prefix: "training_summary"
+  validation_backtest_prefix: "validation_backtest"
