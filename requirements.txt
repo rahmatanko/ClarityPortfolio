@@ -6,3 +6,4 @@ gymnasium
 torch
 numpy
 stable_baselines3
+streamlit
